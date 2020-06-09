@@ -1,7 +1,17 @@
 body {
 	margin: 0;
-	padding: 0;
+	padding: 20px 60px;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+	transition: all .3s;
+}
+
+a:hover {
+	color: #444;
 }
