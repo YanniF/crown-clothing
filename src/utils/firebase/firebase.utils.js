@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
 
 // Your web app's Firebase configuration
@@ -16,18 +16,22 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider()
-provider.setCustomParameters({
+const googleAuthProvider = new GoogleAuthProvider()
+googleAuthProvider.setCustomParameters({
   prompt: "select_account"
 })
 
 export const auth = getAuth()
 
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleAuthProvider )
 
 export const db = getFirestore()
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
+  if (!userAuth) {
+    return
+  }
+
   const userDocRef = await doc(db, 'users', userAuth.uid)
   const userSnapshot = await getDoc(userDocRef)
 
@@ -38,7 +42,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       await setDoc(userDocRef, {
         displayName,
         email,
-        createdAt: new Date()
+        createdAt: new Date(),
+        ...additionalInformation
       })
     }
     catch (error) {
@@ -47,4 +52,16 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   }
 
   return userDocRef
+}
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) {
+    return
+  }
+
+  return await createUserWithEmailAndPassword(auth, email, password)
+}
+
+export const signInAuthUserWithEmailAndPassword = async(email, password) => {
+  return await signInWithEmailAndPassword(auth, email, password)
 }
