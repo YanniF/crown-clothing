@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useContext} from "react";
 
 import FormInput from "../form-input/form-input.component.jsx";
 import Button from "../button/button.component.jsx";
@@ -9,6 +9,7 @@ import {
   signInWithGooglePopup
 } from "../../utils/firebase/firebase.utils.js";
 import {buttonTypeClasses} from "../button/button.type.js";
+import { UserContext } from "../../context/user.context.jsx";
 
 const initialFormState = {
   email: '',
@@ -18,6 +19,7 @@ const initialFormState = {
 const SignInForm = () => {
   const [form, setForm] = useState(initialFormState)
   const [ loading, setLoading ] = useState(false)
+  const { setUser } = useContext(UserContext)
 
   const { email, password} = form
 
@@ -37,7 +39,8 @@ const SignInForm = () => {
     try {
       const { user } = await signInAuthUserWithEmailAndPassword(email, password)
 
-      console.log(user)
+      setUser(user)
+
       resetForm()
     }
     catch (error) {
