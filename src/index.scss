@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  padding: 1.25rem 2.5rem;
   font-family: 'Open Sans Condensed', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -17,4 +18,8 @@ code {
 a {
   text-decoration: none;
   color: #000;
+
+  &:hover {
+    color: #555;
+  }
 }

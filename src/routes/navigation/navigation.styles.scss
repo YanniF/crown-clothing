@@ -19,5 +19,15 @@
       font-size: 1.25rem;
       cursor: pointer;
     }
+
+    button.nav-link {
+      font-family: inherit;
+      background: none;
+      border: none;
+
+      &:hover {
+        color: #555;
+      }
+    }
   }
 }
