@@ -7,7 +7,7 @@ const CartIcon = () => {
   const {isCartDropdownOpen, setIsCartDropdownOpen, cartItemCount} = useContext(CartContext);
 
   return (
-    <button className="cart-icon-container" onClick={() => setIsCartDropdownOpen(!isCartDropdownOpen)}>
+    <button className="cart-icon-container ghost-button" onClick={() => setIsCartDropdownOpen(!isCartDropdownOpen)}>
       <img className="shopping-icon" src={shoppingBag} alt="shopping bag"/>
       <span className='item-count'>{cartItemCount}</span>
     </button>

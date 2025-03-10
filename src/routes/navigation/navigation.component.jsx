@@ -30,7 +30,7 @@ const Navigation = () => {
           </Link>
           {
             user ? (
-              <button className="nav-link" onClick={signOut} tabIndex="0">
+              <button className="nav-link ghost-button" onClick={signOut} tabIndex="0">
                 SIGN OUT
               </button>
             ) : (
