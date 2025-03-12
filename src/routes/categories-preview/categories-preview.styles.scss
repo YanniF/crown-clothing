@@ -1,4 +1,9 @@
-.products-container {
+.category-title {
+  margin-top: 4rem;
+  text-transform: uppercase;
+}
+
+.categories-preview-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 0.625rem;
