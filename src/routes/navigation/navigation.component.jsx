@@ -1,13 +1,13 @@
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import {Link, Outlet} from "react-router-dom";
 
 import {UserContext} from "../../context/user.context.jsx";
 import logo from "../../assets/crown.svg";
-import './navigation.styles.scss'
 import {signOutUser} from "../../utils/firebase/firebase.utils.js";
 import CartIcon from "../../components/cart-icon/cart-icon.component.jsx";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component.jsx";
 import {CartContext} from "../../context/cart.context.jsx";
+import {NavigationContainer, LogoContainer, NavLinks, NavLink, NavButton} from './navigation.styles.jsx'
 
 const Navigation = () => {
   const { user } = useContext(UserContext);
@@ -19,30 +19,30 @@ const Navigation = () => {
 
   return (
     <>
-      <header className="navigation">
-        <Link to="/" className="logo-container">
+      <NavigationContainer>
+        <LogoContainer to="/">
           <img className="logo" src={logo} alt="logo" />
-        </Link>
+        </LogoContainer>
 
-        <div className="nav-links-container">
-          <Link to="/shop" className="nav-link">
+        <NavLinks>
+          <NavLink to="/shop">
             SHOP
-          </Link>
+          </NavLink>
           {
             user ? (
-              <button className="nav-link ghost-button" onClick={signOut} tabIndex="0">
+              <NavButton as="button" className="nav-link ghost-button" onClick={signOut} tabIndex="0">
                 SIGN OUT
-              </button>
+              </NavButton>
             ) : (
-              <Link to="/auth" className="nav-link">
+              <NavLink to="/auth">
                 SIGN IN
-              </Link>
+              </NavLink>
             )
           }
           <CartIcon />
-        </div>
+        </NavLinks>
         {isCartDropdownOpen && <CartDropdown />}
-      </header>
+      </NavigationContainer>
       <Outlet/>
     </>
   )

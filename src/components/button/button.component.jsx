@@ -1,14 +1,15 @@
-import './button.styles.scss';
+import {buttonTypeClasses, buttonTypeMap} from "./button.type.js";
 
-const Button = ({ children, buttonType = '', disabled = false, ...otherProps }) => {
+const Button = ({ children, buttonType = buttonTypeClasses.base, disabled = false, ...otherProps }) => {
+  const CustomButton = buttonTypeMap[buttonType];
+
   return (
-    <button
-      className={`button-container ${buttonType}`}
+    <CustomButton
       disabled={disabled}
       {...otherProps}
     >
       {children}
-    </button>
+    </CustomButton>
   );
 };
 
