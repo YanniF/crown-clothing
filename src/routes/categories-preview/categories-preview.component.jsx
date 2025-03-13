@@ -11,7 +11,7 @@ const CategoriesPreview = () => {
     <>
       {Object.keys(categories)?.map(title => (
         <Fragment key={title}>
-          <h2 className="category-title">
+          <h2 className="categories-preview-title">
             <Link to={`./${title}`}>{title}</Link>
           </h2>
           <div className="categories-preview-container">

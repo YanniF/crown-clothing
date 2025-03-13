@@ -1,7 +1,7 @@
-import './category-item.styles.scss'
 import {useNavigate} from "react-router-dom";
+import './directory-item.styles.scss'
 
-const CategoryItem = ({ title, imageUrl }) => {
+const DirectoryItem = ({ title, imageUrl }) => {
   const navigate = useNavigate()
 
   const goToCategory = () => {
@@ -9,10 +9,10 @@ const CategoryItem = ({ title, imageUrl }) => {
   }
 
   return (
-    <div className="category-container" onClick={goToCategory} role="link">
+    <div className="directory-item-container" onClick={goToCategory} role="link">
       <div className="background-image" style={{backgroundImage: `url(${imageUrl})`}}>
       </div>
-      <div className="category-body-container">
+      <div className="body">
         <h2>{title}</h2>
         <p>Shop Now</p>
       </div>
@@ -20,4 +20,4 @@ const CategoryItem = ({ title, imageUrl }) => {
   )
 }
 
-export default CategoryItem
+export default DirectoryItem
