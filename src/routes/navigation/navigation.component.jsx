@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {Link, Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 
 import {UserContext} from "../../context/user.context.jsx";
 import logo from "../../assets/crown.svg";
