@@ -1,15 +1,37 @@
-import {createContext, useState, useEffect} from "react";
+import {createContext, useEffect, useReducer} from "react";
 import {createUserDocumentFromAuth, onAuthStateChangedListener} from "../utils/firebase/firebase.utils.js";
+import {USER_ACTION_TYPES} from "./action-types.js";
+
+const initialState = {
+  user: null,
+}
 
 // value you want to access
 export const UserContext = createContext({
   user: null,
-  setUser: () => null,
 });
 
+const userReducer = (state, action) => {
+  const { type, payload } = action;
+  
+  if (type === USER_ACTION_TYPES.SET_USER) {
+    return {
+      ...state,
+      user: payload
+    };
+  }
+
+  throw new Error('Unhandled type "' + type + '" in userReducer');
+}
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [state, dispatch] = useReducer(userReducer, initialState);
+  const { user } = state;
+
+  const setUser = (user) => dispatch({
+    type: USER_ACTION_TYPES.SET_USER,
+    payload: user,
+  })
 
   useEffect(() => {
     return onAuthStateChangedListener(user => {
@@ -21,5 +43,5 @@ export const UserProvider = ({ children }) => {
     })
   }, []);
 
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;
 }
