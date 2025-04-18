@@ -13,7 +13,7 @@ export const UserContext = createContext({
 
 const userReducer = (state, action) => {
   const { type, payload } = action;
-  
+
   if (type === USER_ACTION_TYPES.SET_USER) {
     return {
       ...state,
@@ -28,9 +28,9 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
   const { user } = state;
 
-  const setUser = (user) => dispatch({
+  const setUser = (payload) => dispatch({
     type: USER_ACTION_TYPES.SET_USER,
-    payload: user,
+    payload,
   })
 
   useEffect(() => {
