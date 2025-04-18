@@ -112,10 +112,10 @@ export const CartProvider = ({children}) => {
     updateCartItemsReducer(items);
   }
 
-  const setIsCartDropdownOpen = () => {
+  const setIsCartDropdownOpen = (value) => {
     dispatch(createAction(
       CART_ACTION_TYPES.SET_IS_CART_OPEN, {
-        isCartDropdownOpen: !isCartDropdownOpen
+        isCartDropdownOpen: value
       })
     );
   }
